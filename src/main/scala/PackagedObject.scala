@@ -1,6 +1,3 @@
-/**
- * Created by prophet on 07.02.15.
- */
 class PackagedObject(obj:ProxyObject,state:Boolean=false) {
   @volatile var ready=state
   @volatile var updated=false
@@ -14,7 +11,7 @@ class PackagedObject(obj:ProxyObject,state:Boolean=false) {
         proxy.innerObj.value=newVal
         proxy.innerObj.actualUse+=1
         if(proxy.localUsage==proxy.innerObj.actualUse){
-//          println("\n\nKONIEC LIMITU!!!!!!!!!!!!!!!")
+          //Maximal number of uses has been reached.
           commit(proxy.innerObj.name)
         }
       }else{

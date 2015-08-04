@@ -5,18 +5,14 @@ import scala.collection.mutable
 import scala.concurrent.Await
 import scala.concurrent.duration._
 
-/**
- * Created by prophet on 07.02.15.
- */
 class Client3 (entryPoint:ActorRef,trans:ActorRef) extends Actor{
   implicit val timeout = Timeout(10 seconds)
   val objectsToUse = mutable.Map[String,PackagedObject]()
   trans ! Claim()
 
-  //  println(self+" KLIENT")
-  askForObject("OBIEKT C",2)
-  askForObject("OBIEKT B",2)
-  askForObject("OBIEKT A",2)
+  askForObject("OBJECT C",2)
+  askForObject("OBJECT B",2)
+  askForObject("OBJECT A",2)
 
 
   def askForObject(name:String, supremum:Int) = {

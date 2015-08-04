@@ -2,6 +2,8 @@ import akka.actor.ActorRef
 
 import scala.collection.mutable
 
+//Message types
+
 case class Query(trans:Transaction,objName:String,supremum:Int)
 case class Success(proxy:Option[ProxyObject])
 case class Ready(obj:SharedObject)

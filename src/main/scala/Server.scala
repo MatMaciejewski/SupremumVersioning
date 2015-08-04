@@ -8,9 +8,7 @@ import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 import scala.collection.mutable
 
-/**
- * Created by prophet on 07.02.15.
- */
+
 class Server(serverSet: mutable.Set[ActorRef]) extends Actor {
   val objectsMap = mutable.Map[String, ActorRef]()
   val objects = mutable.Map[String, SharedObject]()

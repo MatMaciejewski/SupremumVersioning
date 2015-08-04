@@ -9,6 +9,7 @@ import akka.pattern.ask
 
 
 object Coordinator extends App{
+  //Set containing references to servers
   val servers = mutable.Set[ActorRef]()
   implicit val timeout = Timeout(10 seconds)
   val system = ActorSystem("Supreme")
@@ -35,5 +36,4 @@ object Coordinator extends App{
   val transaction3= system.actorOf(Props(new Transaction(server)))
   val client3 = system.actorOf(Props(new Client3(server3,transaction3)))
 
-  //  system.shutdown
 }

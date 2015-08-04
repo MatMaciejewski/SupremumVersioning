@@ -5,27 +5,25 @@ import scala.collection.mutable
 import scala.concurrent.Await
 import scala.concurrent.duration._
 
-/**
- * Created by prophet on 07.02.15.
- */
 class Client (entryPoint:ActorRef,trans:ActorRef) extends Actor{
   implicit val timeout = Timeout(10 seconds)
   val objectsToUse = mutable.Map[String,PackagedObject]()
+  //Send Claim to transaction
   trans ! Claim()
 
-//  println(self+" KLIENT")
-  askForObject("OBIEKT B",2)
-  askForObject("OBIEKT A",2)
-  askForObject("OBIEKT C",2)
+  askForObject("OBJECT B",2)
+  askForObject("OBJECT A",2)
+  askForObject("OBJECT C",2)
+
 
 
   def askForObject(name:String, supremum:Int) = {
+    //Send ask to transaction, asking for object <name>, maximal amount of times Client may use it is <supremum>
     var ob = trans ? Access(name,supremum)
     var result = Await.result(ob,Duration.Inf)
     result match {
       case msg:AccessReply => {
 //        println(self+ "Package received. "+msg.pack.proxy.innerObj.declaredUse)
-//        println(self)
         objectsToUse+=(name->msg.pack)
       }
       case _ => {
